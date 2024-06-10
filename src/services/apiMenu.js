@@ -27,4 +27,5 @@ export async function updateItem(id, value) {
 export async function deleteItem(id, value) {
     const menuDoc = doc(db, "menu", id);
     await deleteDoc(menuDoc, value);
+    return menuDoc;
 }

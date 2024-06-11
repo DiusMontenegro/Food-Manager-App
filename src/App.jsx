@@ -5,6 +5,7 @@ import AppLayout from "./ui/AppLayout";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
+import ItemDetails from "./features/menu/ItemDetails";
 
 const router = createBrowserRouter([
     {
@@ -17,6 +18,12 @@ const router = createBrowserRouter([
             {
                 path: "/menu",
                 element: <Menu />,
+                children: [
+                    {
+                        path: "/menu/item/:id",
+                        element: <ItemDetails />,
+                    },
+                ],
             },
         ],
     },

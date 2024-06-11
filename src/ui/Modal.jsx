@@ -1,12 +1,13 @@
 // components/Modal.js
 import PropTypes from "prop-types";
+import { createPortal } from "react-dom";
 import FocusLock from "react-focus-lock"; // Import the focus-lock library
 
 const Modal = ({ isOpen, children }) => {
     if (!isOpen) return null;
 
-    return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-45">
+    return createPortal(
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-45 backdrop-blur-sm">
             <FocusLock>
                 <div
                     role="dialog"
@@ -16,15 +17,14 @@ const Modal = ({ isOpen, children }) => {
                     {children}
                 </div>
             </FocusLock>
-        </div>
+        </div>,
+        document.body
     );
 };
 
 Modal.propTypes = {
     isOpen: PropTypes.bool.isRequired,
-    onClose: PropTypes.func.isRequired,
     children: PropTypes.node.isRequired,
-    action: PropTypes.string,
 };
 
 export default Modal;

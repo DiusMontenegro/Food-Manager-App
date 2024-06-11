@@ -18,6 +18,11 @@ function DeleteItem({ handleDeleteModal, item }) {
         onError: () => toast.error("Error Deleting the item"),
     });
 
+    function removeItem(id) {
+        mutate(id);
+        handleDeleteModal();
+    }
+
     return (
         <div>
             <h1>Are you sure you want to delete &quot;{item.name}&quot; ?</h1>
@@ -31,10 +36,7 @@ function DeleteItem({ handleDeleteModal, item }) {
                 </button>
                 <button
                     className="btn btn-error btn-sm mt-4 text-white"
-                    onClick={() => {
-                        mutate(item.id);
-                        handleDeleteModal();
-                    }}
+                    onClick={() => removeItem(item.id)}
                     disabled={isLoading}
                 >
                     Delete

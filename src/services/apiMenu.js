@@ -4,6 +4,7 @@ import {
     collection,
     deleteDoc,
     doc,
+    getDoc,
     getDocs,
     updateDoc,
 } from "firebase/firestore";
@@ -28,4 +29,14 @@ export async function deleteItem(id, value) {
     const menuDoc = doc(db, "menu", id);
     await deleteDoc(menuDoc, value);
     return menuDoc;
+}
+
+export async function getItemById(id) {
+    const menuDoc = doc(db, "menu", id);
+    const docSnapshot = await getDoc(menuDoc);
+    if (docSnapshot.exists()) {
+        return { ...docSnapshot.data(), id: docSnapshot.id };
+    } else {
+        throw new Error("Document not found");
+    }
 }

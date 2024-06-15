@@ -1,10 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { getMenu } from "../../services/apiMenu";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 
 import Loader from "../../ui/Loader";
 
 function Menu() {
+    const location = useLocation();
+
     const {
         data: menu,
         error,
@@ -18,14 +20,17 @@ function Menu() {
     if (error) return <div>Error: {error.message}</div>;
 
     function abbreviateSize(productSize) {
-        if (productSize === "small") {
-            return "SM";
-        } else if (productSize === "medium") {
-            return "MD";
-        } else if (productSize === "large") {
-            return "LG";
-        } else {
-            return "XL";
+        switch (productSize) {
+            case "small":
+                return "SM";
+            case "medium":
+                return "MD";
+            case "large":
+                return "LG";
+            case "extra-large":
+                return "XL";
+            default:
+                return productSize.toUpperCase();
         }
     }
 
@@ -46,7 +51,31 @@ function Menu() {
                         Menu
                     </label>
 
-                    <Outlet />
+                    {location.pathname === "/menu" ? (
+                        <div className="mt-2 flex flex-col items-center justify-center space-y-6 rounded-xl bg-gradient-to-r from-green-300 via-teal-400 to-blue-500 p-8 text-center shadow-2xl transition-transform duration-300 md:p-12 lg:p-16">
+                            <h1 className="text-4xl font-extrabold text-white drop-shadow-lg sm:text-5xl md:text-6xl lg:text-7xl">
+                                Discover Delicious Delights!
+                            </h1>
+                            <p className="my-4 text-lg text-white drop-shadow-md sm:text-xl md:text-2xl lg:text-3xl">
+                                &quot;Indulge in every bite. Make your taste
+                                buds dance!&quot;
+                            </p>
+                            <h3 className="text-white">
+                                Start by clicking the menu items to check the
+                                details or you can
+                            </h3>
+                            <div className="mt-6 flex flex-col items-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
+                                <Link
+                                    to="/menu/create"
+                                    className="btn btn-accent rounded-full bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 text-lg font-bold text-white shadow-lg transition-transform hover:scale-110 hover:bg-gradient-to-br"
+                                >
+                                    Create New Product
+                                </Link>
+                            </div>
+                        </div>
+                    ) : (
+                        <Outlet />
+                    )}
                 </main>
                 <aside className="drawer-side">
                     <label

@@ -78,6 +78,7 @@ function EditItem() {
                         {...register("category", {
                             required: "This field is required",
                         })}
+                        autoFocus
                         className="select select-accent mt-1 block w-full rounded-md border p-2 focus:ring-accent"
                     >
                         <option value="">Select a Category</option>

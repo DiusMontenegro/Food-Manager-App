@@ -56,6 +56,7 @@ function CreateItem() {
                     <select
                         id="category"
                         name="category"
+                        autoFocus
                         {...register("category", {
                             required: "This field is required",
                         })}

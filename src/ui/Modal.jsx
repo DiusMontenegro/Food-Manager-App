@@ -1,7 +1,6 @@
-// components/Modal.js
 import PropTypes from "prop-types";
 import { createPortal } from "react-dom";
-import FocusLock from "react-focus-lock"; // Import the focus-lock library
+import FocusLock from "react-focus-lock";
 
 const Modal = ({ isOpen, children }) => {
     if (!isOpen) return null;

@@ -1,11 +1,14 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Home from "./ui/Home";
-import Menu from "./features/menu/Menu";
-import AppLayout from "./ui/AppLayout";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
+
+import Home from "./ui/Home";
+import Menu from "./features/menu/Menu";
+import AppLayout from "./ui/AppLayout";
 import ItemDetails from "./features/menu/ItemDetails";
+import CreateItem from "./features/menu/CreateItem";
+import EditItem from "./features/menu/EditItem";
 
 const router = createBrowserRouter([
     {
@@ -22,6 +25,14 @@ const router = createBrowserRouter([
                     {
                         path: "/menu/item/:id",
                         element: <ItemDetails />,
+                    },
+                    {
+                        path: "/menu/create",
+                        element: <CreateItem />,
+                    },
+                    {
+                        path: "/menu/edit/:id",
+                        element: <EditItem />,
                     },
                 ],
             },

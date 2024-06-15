@@ -1,16 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { getMenu } from "../../services/apiMenu";
-import { useState } from "react";
-
-import Loader from "../../ui/Loader";
-import TableRow from "../../ui/TableRow";
-import Modal from "../../ui/Modal";
-import CreateItem from "./CreateItem";
 import { Link, Outlet } from "react-router-dom";
 
-function Menu() {
-    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+import Loader from "../../ui/Loader";
 
+function Menu() {
     const {
         data: menu,
         error,
@@ -20,22 +14,30 @@ function Menu() {
         queryFn: getMenu,
     });
 
-    // function toggleCreateModal() {
-    //     setIsCreateModalOpen((show) => !show);
-    // }
-
     if (isLoading) return <Loader />;
     if (error) return <div>Error: {error.message}</div>;
 
+    function abbreviateSize(productSize) {
+        if (productSize === "small") {
+            return "SM";
+        } else if (productSize === "medium") {
+            return "MD";
+        } else if (productSize === "large") {
+            return "LG";
+        } else {
+            return "XL";
+        }
+    }
+
     return (
-        <div className="space-y-5 ">
+        <div className="space-y-5">
             <div className="drawer md:drawer-open">
                 <input
                     id="my-drawer-2"
                     type="checkbox"
                     className="drawer-toggle"
                 />
-                <div className="drawer-content m-2">
+                <main className="drawer-content m-2">
                     {/* Page content here */}
                     <label
                         htmlFor="my-drawer-2"
@@ -45,8 +47,8 @@ function Menu() {
                     </label>
 
                     <Outlet />
-                </div>
-                <div className="drawer-side">
+                </main>
+                <aside className="drawer-side">
                     <label
                         htmlFor="my-drawer-2"
                         aria-label="close sidebar"
@@ -62,28 +64,28 @@ function Menu() {
                             </label>
                         </li>
                         {/* Sidebar content here */}
-                        <li className="mb-3 font-bold">Menu items</li>
+                        <li className="mb-3 text-xl font-bold">Menu items</li>
                         <li className="mb-3">
-                            <Link className="btn btn-accent btn-sm rounded-md font-semibold text-white">
+                            <Link
+                                to="/menu/create"
+                                className="btn btn-accent btn-sm rounded-md font-semibold text-white"
+                            >
                                 Create New Product
                             </Link>
                         </li>
-                        <ul className="max-h-[460px] overflow-y-auto xl:max-h-[540px]">
+                        <ul className="max-h-[440px] overflow-y-auto xl:max-h-[520px]">
                             {menu.map((item) => (
                                 <li key={item.id} className="mb-1">
                                     <Link to={`/menu/item/${item.id}`}>
-                                        {item.name}
+                                        {item.name} -{" "}
+                                        {abbreviateSize(item.size)}
                                     </Link>
                                 </li>
                             ))}
                         </ul>
                     </ul>
-                </div>
+                </aside>
             </div>
-
-            {/* <Modal isOpen={isCreateModalOpen}>
-                <CreateItem showModal={toggleCreateModal} />
-            </Modal> */}
         </div>
     );
 }

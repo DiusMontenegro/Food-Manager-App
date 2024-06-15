@@ -57,6 +57,7 @@ function CreateItem() {
                         id="category"
                         name="category"
                         autoFocus
+                        required
                         {...register("category", {
                             required: "This field is required",
                         })}
@@ -74,6 +75,7 @@ function CreateItem() {
                         type="text"
                         id="name"
                         name="name"
+                        required
                         {...register("name", {
                             required: "This field is required",
                         })}
@@ -86,6 +88,7 @@ function CreateItem() {
                     <select
                         id="size"
                         name="size"
+                        required
                         {...register("size", {
                             required: "This field is required",
                         })}
@@ -104,6 +107,7 @@ function CreateItem() {
                         type="number"
                         id="price"
                         name="price"
+                        required
                         placeholder="Enter price"
                         step="0.01"
                         {...register("price", {
@@ -122,6 +126,7 @@ function CreateItem() {
                         type="number"
                         id="cost"
                         name="cost"
+                        required
                         placeholder="Enter cost"
                         step="0.01"
                         {...register("cost", {
@@ -140,6 +145,7 @@ function CreateItem() {
                         type="number"
                         id="stock"
                         name="stock"
+                        required
                         {...register("stock", {
                             required: "This field is required",
                             min: {

@@ -75,6 +75,7 @@ function EditItem() {
                     <select
                         id="category"
                         name="category"
+                        required
                         {...register("category", {
                             required: "This field is required",
                         })}
@@ -93,6 +94,7 @@ function EditItem() {
                         type="text"
                         id="name"
                         name="name"
+                        required
                         {...register("name", {
                             required: "This field is required",
                         })}
@@ -105,6 +107,7 @@ function EditItem() {
                     <select
                         id="size"
                         name="size"
+                        required
                         {...register("size", {
                             required: "This field is required",
                         })}
@@ -124,6 +127,7 @@ function EditItem() {
                         id="price"
                         name="price"
                         placeholder="Enter price"
+                        required
                         step="0.01"
                         {...register("price", {
                             required: "This field is required",
@@ -142,6 +146,7 @@ function EditItem() {
                         id="cost"
                         name="cost"
                         placeholder="Enter cost"
+                        required
                         step="0.01"
                         {...register("cost", {
                             required: "This field is required",
@@ -159,6 +164,7 @@ function EditItem() {
                         type="number"
                         id="stock"
                         name="stock"
+                        required
                         {...register("stock", {
                             required: "This field is required",
                             min: {
